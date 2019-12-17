@@ -14,10 +14,7 @@
   "Possibly unwisely reaches into some t.d.a internals to kick off pom creation or synchronization.
   Note that this ignores system/user deps.edn files and aliases. Ideally this is the same result as
   running `clojure -Spom`."
-  []
-  ;; TODO: should probably include the system pom here, see tda-reader/clojure-env
-  (let [deps (tda-reader/slurp-deps (jio/file "deps.edn"))]
-    (tda-pom/sync-pom deps (jio/file "."))))
+  [])
 
 (xml/alias-uri 'pom "http://maven.apache.org/POM/4.0.0")
 
@@ -100,8 +97,6 @@
                        (replace-paths {[::pom/project ::pom/artifactId]                    artifact-id
                                        [::pom/project ::pom/groupId]                       group-id
                                        [::pom/project ::pom/version]                       version
-                                       [::pom/project ::pom/scm ::pom/connection]          git-url
-                                       [::pom/project ::pom/scm ::pom/developerConnection] git-url
                                        [::pom/project ::pom/scm ::pom/tag]                 sha
                                        [::pom/project ::pom/scm ::pom/url]                 scm-url})
                        zip/root))
